@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- 문서의 메타데이터 및 설정 영역 (브라우저 상단 탭 등에 영향) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="울티마 온라인 t2a 지향 프리 샤드.">
-    <meta name="keywords" content="t2a 순정 복원 프로잭트">
+    <meta name="keywords" content="t2a 순정 복원 프로젝트">
     <title>울티마 온라인 Felucca 샤드</title>
 </head>
 <body>
-
-    <!-- 1. 헤더 (Header): 로고, 내비게이션 메뉴 등 상단 영역 -->
     <header>
         <h1>울티마 온라인 펠루카 샤드</h1>
         <nav>
             <ul>
                 <li><a href="#">클라이언트 다운</a></li>
-                <li><a href="http://61.105.41.171:8000" target="_blank">서버현황</a></li>
-                <li><a href="#">게시판</a></li>
+                <li>서버 상태: <a href="http://61.105.41.171:8000" id="server-status" target="_blank">확인 중...</a></li>
+                <li><a href="http://61.105.41.171:8000" target="_blank">게시판</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 2. 본문 (Main): 페이지의 핵심 콘텐츠가 들어가는 영역 -->
- <main>
-    <section>
-        <h2>[서버 안내]</h2>
-        <div id="content-area">내용을 불러오는 중...</div>
-    </section>
-</main>
+    <main>
+        <section>
+            <h2>[서버 안내]</h2>
+            <div id="content-area">내용을 불러오는 중...</div>
+        </section>
+    </main>
 
-<script>
-    // content.txt 파일을 읽어와서 #content-area 안에 넣음
-    fetch('content.txt')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('content-area').innerText = data;
-        })
-        .catch(error => console.log('파일을 찾을 수 없습니다:', error));
-</script>
-
-    <!-- 3. 푸터 (Footer): 저작권 정보, 연락처, 사이트 맵 등 하단 영역 -->
     <footer>
         <p>&copy; 2026 비영리 내돈 내산 운영.</p>
-
     </footer>
+
+    <script>
+        // 1. 서버 상태 확인
+        const statusEl = document.getElementById('server-status');
+        fetch('http://61.105.41.171:8000', { mode: 'no-cors' })
+            .then(() => { statusEl.innerText = "● ON"; statusEl.style.color = "green"; })
+            .catch(() => { statusEl.innerText = "○ OFF"; statusEl.style.color = "red"; });
+
+        // 2. content.txt 파일 불러오기
+        fetch('content.txt')
+            .then(response => response.text())
+            .then(data => { document.getElementById('content-area').innerText = data; })
+            .catch(error => { document.getElementById('content-area').innerText = "공지사항을 불러올 수 없습니다."; });
+    </script>
 
 </body>
 </html>
