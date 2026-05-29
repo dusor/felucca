@@ -29,7 +29,7 @@
         footer { 
             background-color: #333; 
             color: white; 
-            text-align: center; 
+            text-align:left; 
             padding: 10px; 
             margin-top: 20px; 
         }
@@ -42,12 +42,10 @@
         <nav>
             <ul>
                 <li><a href="#">클라이언트 다운</a></li>
-                <li>서버 상태: <span href="http://61.105.41.171:8000" id="server-status" target="_blank">확인 중...</span></li>
                 <li><a href="#" target="_blank">게시판</a></li>
             </ul>
         </nav>
     </header>
-
     <main>
         <section>
             <h2>[서버 안내]</h2>
@@ -58,22 +56,5 @@
     <footer>
         <p>&copy; 2026 비영리 내돈 내산 운영.</p>
     </footer>
-
-   <script>
-    const statusEl = document.getElementById('server-status');
-    // 서버의 응답을 체크하는 방식 (상태를 더 확실하게 확인)
-    fetch('http://61.105.41.171:8000', { mode: 'no-cors', cache: 'no-cache' })
-        .then(() => {
-            // mode: 'no-cors'에서는 성공/실패 여부를 정확히 알기 어렵지만,
-            // 일단 요청이 시도되었다는 것만으로도 ON으로 표시하는 것이 일반적입니다.
-            statusEl.innerText = "● ON";
-            statusEl.style.color = "green";
-        })
-        .catch(() => {
-            statusEl.innerText = "○ OFF";
-            statusEl.style.color = "red";
-        });
-</script>
-
 </body>
 </html>
